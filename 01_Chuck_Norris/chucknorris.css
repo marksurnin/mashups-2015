@@ -1,0 +1,25 @@
+body{
+	font-family: 'Lato';
+}
+
+#joke{
+	text-align: center;
+	font-size: 30px;
+	width: 80%
+	margin: 0 auto;
+}
+
+input{
+	display: block;
+	margin: 300px auto 100px;
+	width: 300px;
+	height: 40px;
+	font-size: 32px;
+	font-family: 'Lato';
+	text-align: left;
+	border: 0px;
+}
+
+*:focus {
+    outline: 0;
+}
