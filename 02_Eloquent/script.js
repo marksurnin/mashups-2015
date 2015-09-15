@@ -1,8 +1,6 @@
 function triangle() {
-  var arr = [];
-  for (i = 1; i < 8; i++) {
-    arr.push('#');
-    console.log(arr.join(''));
+  for (var i = '#'; i.length < 8; i+='#') {
+    console.log(i);
   }
 }
 
@@ -30,7 +28,7 @@ function chessBoard(size) {
 
   for (i = 0; i < size; i++) {
     for (j = 0; j < size; j++) {
-      if ((i + j) % 2== 0) {
+      if ((i + j) % 2 == 0) {
         board += ' ';
       } else {
         board += '#';
