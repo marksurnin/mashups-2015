@@ -1,1 +1,1 @@
-A few exercises from the Eloquent JS book.
+A few exercises from the 2nd chapter of Eloquent JS.
