@@ -1,1 +1,0 @@
-For my first project I am going to visualize tweets around a given location on a Google Map. The user will enter the name of the city, which I will use to look up the coordinates of the location. then I will use Twitter API to get a 100 tweets from that location within a 5km radius. Finally, I will use the Google Maps API to visualize the tweets on the map.

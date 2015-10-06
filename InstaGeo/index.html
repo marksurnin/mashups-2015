@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InstaGeo</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <section id="sidebar">
+      <input id="input" type="text" placeholder="Enter your location" autofocus></input>
+      <div id="about">
+        <p>This is a small web app that visualizes Instagram posts around a given location.</p>
+        <p>Hover over a marker to see the thumbnail, click on the marker to see the original.</p>
+        <a href="https://github.com/marksurnin/mashups-2015/tree/master/InstaGeo">View source</a>
+      </div>
+    </section>
+    <section id="map"></section>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdIFyEoqfmK13GDQoT37Lt2AQOZOmnRQI">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

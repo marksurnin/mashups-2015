@@ -1,5 +1,5 @@
 function getData () {
-  var input = document.getElementById('input')
+  var input = document.getElementById('input');
   var name = input.value;
   var firstName = input.value.split(' ')[0];
 
