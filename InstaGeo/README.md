@@ -25,5 +25,7 @@ Those would involve optimizing the speed of the application by removing old item
 ## Resources
 
 [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro)
+
 [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/)
+
 [Instagram API](https://instagram.com/developer/)
