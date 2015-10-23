@@ -1,0 +1,15 @@
+svg {
+  background-color: #f1f1f1;
+}
+
+svg #main_circle {
+  fill: purple;
+}
+
+svg .eye {
+  fill: yellow;
+}
+
+svg #mouth {
+  fill: white;
+}

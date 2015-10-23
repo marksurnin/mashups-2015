@@ -1,5 +1,6 @@
 var map;
 var photos = [];
+console.log(photos.length);
 var first_run = true; // used to append all photos to photos array on first run (line 34)
 
 function getInputValue() {

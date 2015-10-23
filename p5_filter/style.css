@@ -1,0 +1,9 @@
+body {
+	margin: 0;
+}
+
+#buttonContainer {
+	position: absolute;
+	width: 100%;
+	height: 50px;
+}
