@@ -1,26 +1,45 @@
-//Called once when the page is ready
+var blocks = [];
+
+function Block() {
+  this.blockW = random(2, 20);
+  this.blockH = random(2, 20);
+
+  this.posX = random(0, width);
+  this.posY = random(0, height);
+
+  this.speedX = random(-2, 2);
+  this.speedY = random(-2, 2);
+
+  this.r = random(200, 255);
+  // this.g = random(0, 255);
+  // this.b = random(0, 255);
+
+  this.display = function() {
+    fill(this.r, this.r, this.r);
+    rect(this.posX, this.posY, this.blockW, this.blockH);
+  };
+
+  this.update = function() {
+    this.posX += this.speedX;
+    this.posY += this.speedY;
+  }
+
+  this.run = function() {
+    this.update();
+    this.display();
+  }
+}
+
 function setup() {
 	console.log("Setup");
 	createCanvas(windowWidth, windowHeight);
-  x = windowWidth/2;
-  y = 10;
-  g = 9.8;
-  v = 2;
+  for (var i = 0; i < 1000 ; i++) {
+    blocks.push(new Block());
+  }
 }
 
-//Called every frame after setup is called
 function draw() {
-  background(0,0,0);
-  ellipse(x, y, 50, 50);
-  y = y*1.5 g;
-}
-
-//Called every time the mouse if pressed
-function mousePressed(){
-	console.log("X:" + mouseX + " Y:" + mouseY);
-}
-
-//Called every time the window is resized
-function windowResized() {
-	resizeCanvas(windowWidth, windowHeight);
+  for (var i = 0; i < blocks.length; i++) {
+    blocks[i].run();
+  }
 }
