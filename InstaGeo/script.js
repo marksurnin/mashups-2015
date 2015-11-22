@@ -1,6 +1,7 @@
 var map;
 var photos = [];
-console.log(photos.length);
+var markers = [];
+var warning = false;
 var first_run = true; // used to append all photos to photos array on first run (line 34)
 
 function getInputValue() {
@@ -16,8 +17,14 @@ function centerMapOnInput(input) {
       console.log('We have problems:', json);
     },
     success: function(json) {
-      map.setCenter({lat: json.results[0].geometry.location.lat, lng: json.results[0].geometry.location.lng});
-      map.setZoom(15); // reset zoom
+      if (input == 'Abu Dhabi') {
+        map.setCenter({lat: 24.4562117, lng: 54.3781501});
+        map.setZoom(13);
+      } else {
+        map.setCenter({lat: json.results[0].geometry.location.lat, lng: json.results[0].geometry.location.lng});
+        map.setZoom(13);
+      }
+      
     }
   });
 }
@@ -33,6 +40,7 @@ function getInstaData(LatLng, cb) {
     success: function(json) {
       if (first_run) {
           photos = json.data;
+          console.log('json: ', json);
           first_run = false;
         } else {
           for (var i = 0; i < json.data.length; i++) {
@@ -49,7 +57,7 @@ function getInstaData(LatLng, cb) {
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 51.5065699, lng: -0.1276912},
-    zoom: 15
+    zoom: 13
   });
 }
 
@@ -61,6 +69,7 @@ function drawMarker(photo) {
     position: {lat: photo.location.latitude, lng: photo.location.longitude},
     map: map,
   });
+  markers.push(marker);
   marker.addListener('mouseover', function() {
     infowindow.open(map, marker);
   });
@@ -73,19 +82,76 @@ function drawMarker(photo) {
 }
 
 function getMarkers() {
-  getInstaData(map.getCenter(), function(err, photos) {
-    for (var i = 0; i < photos.length; i++) {
-      var photo = photos[i];
-      drawMarker(photo);
+  var mapCenter = {
+    H: map.center.lat(),
+    L: map.center.lng()
+  }
+
+  /*
+  Create a coorinate grid to increase search radius:
+  0 1 2
+  3 4 5
+  6 7 8
+  where 4 is the mapCenter
+  */
+  var centers = Array(9);
+
+  for (var i = 0; i < centers.length; ++i) {
+    if (centers[i] == null) {
+      centers[i] = {};
     }
-  });
+    centers[i] = {H: mapCenter.H, L: mapCenter.L};
+    // Latitude shift
+    if (i < 3) {
+      centers[i].H += 0.07;
+    } else if (i > 5) {
+      centers[i].H -= 0.07;
+    }
+
+    // Longitude shift
+    if (i % 3 == 0) {
+      centers[i].L -= 0.07;
+    } else if (i % 3 == 2) {
+      centers[i].L += 0.07;
+    }
+
+    getInstaData(centers[i], function(err, photoData) {
+      for (var i = 0; i < photoData.length; i++) {
+        var photo = photoData[i];
+        drawMarker(photo);
+      }
+    });
+  }
+}
+
+function removeMarkers() {
+  var not = 0;
+  for (var i = 0; i < markers.length; ++i) {
+    if (!map.getBounds().contains(markers[i].getPosition())) {
+      not += 1;
+      markers[i].setMap(null);
+      markers.splice(i, 1);
+    }
+  }
+  console.log('removed' + not);
 }
 
 $(document).ready(function(){
   initMap();
-  getMarkers();
-  google.maps.event.addListener(map,'center_changed',function() {
-    getMarkers();
+  // getMarkers();
+  google.maps.event.addListener(map,'idle',function() {
+    if (map.zoom > 12) {
+      getMarkers();
+      removeMarkers();
+      console.log(photos.length);
+      $('#warning').remove();
+      warning = false;
+    } else {
+      if (!warning) {
+        $('#about').append('<p id="warning">Please zoom in.</p>');
+        warning = true;
+      }
+    }
   });
 
   // search location and center map when enter is pressed
