@@ -3,12 +3,16 @@
   <head>
     <title>Urbanization</title>
     <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   </head>
   <body>
-    <div id='container'>
+    <p>
+      <label for="amount">Year selected:</label>
+      <input type="text" id="year" readonly style="border:0; color:#f6931f; font-weight:bold;">
+    </p>
+    <div id='slider'>
     </div>
     <div id="blocker">
-
       <div id="instructions">
         <span style="font-size:40px">Click to play</span>
         <br />
@@ -20,12 +24,12 @@
           It uses Three.js 3D JavaScript animation library to visualize the level of urbanization of different countries relative to their population. The data is accessed from the World Bank. The inspiration for such medium of visualization came from driving along the Sheikh Zayed Road in Dubai, which is essentially a long straight road with skyscrapers on either side. The height of each block in the visualization represents the relative urbanization level of the respective country, identified by the tiled texture of the country's flag. The actual values are not shown, as the idea is to compare the relative urbanization level of countries, especially when two countries with vastly different urbanization levels are placed together.
         </div>
       </div>
-
     </div>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="three.min.js"></script>
     <script src="PointerLockControls.js"></script>
+    <script src="data.js"></script>
     <script src="script.js"></script>
-    <script src="scripts_02.js"></script>
   </body>
 </html>

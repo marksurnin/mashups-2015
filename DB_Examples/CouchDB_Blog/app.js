@@ -34,7 +34,7 @@ app.get("/", function (request, response) {
 
 // POST - route to create a new note.
 app.post("/save", function (request, response) {
-	console.log("Making a post!");
+	console.log("Making a post!", request);
 	// Use the Request lib to POST the data to the CouchDB on Cloudant
 	Request.post({
 		url: CLOUDANT_URL,
